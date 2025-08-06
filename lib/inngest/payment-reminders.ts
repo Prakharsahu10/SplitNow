@@ -60,7 +60,7 @@ export const paymentReminders = inngest.createFunction(
           if (!rows) return { userId: u._id, skipped: true };
 
           const html: string = `
-            <h2>Splitr – Payment Reminder</h2>
+            <h2>SplitNow – Payment Reminder</h2>
             <p>Hi ${u.name}, you have the following outstanding balances:</p>
             <table cellspacing="0" cellpadding="0" border="1" style="border-collapse:collapse;">
               <thead>
@@ -75,7 +75,7 @@ export const paymentReminders = inngest.createFunction(
             // TODO: Send email using Convex action once api.email.sendEmail is available
             // const emailResult = await convex.action(api.email.sendEmail, {
             //   to: u.email,
-            //   subject: "You have pending payments on Splitr",
+            //   subject: "You have pending payments on SplitNow",
             //   html,
             //   apiKey: process.env.RESEND_API_KEY!,
             // });
