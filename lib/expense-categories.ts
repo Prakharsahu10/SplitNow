@@ -139,8 +139,11 @@ export const EXPENSE_CATEGORIES = {
 };
 
 // Helper function to get category by ID
-export const getCategoryById = (categoryId) => {
-  return EXPENSE_CATEGORIES[categoryId] || EXPENSE_CATEGORIES.other;
+export const getCategoryById = (categoryId: string): typeof EXPENSE_CATEGORIES[keyof typeof EXPENSE_CATEGORIES] => {
+  return (
+    EXPENSE_CATEGORIES[categoryId as keyof typeof EXPENSE_CATEGORIES] ||
+    EXPENSE_CATEGORIES.other
+  );
 };
 
 // Get array of all categories (useful for dropdowns)
@@ -149,7 +152,7 @@ export const getAllCategories = () => {
 };
 
 // Get icon for a category
-export const getCategoryIcon = (categoryId) => {
+export const getCategoryIcon = (categoryId: string) => {
   const category = getCategoryById(categoryId);
   return category.icon;
 };

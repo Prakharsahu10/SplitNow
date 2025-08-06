@@ -133,7 +133,7 @@ export function ExpenseList({
       {expenses.map((expense) => {
         const payer = getUserDetails(expense.paidByUserId);
         const isCurrentUserPayer = expense.paidByUserId === currentUser?._id;
-        const category = getCategoryById(expense.category);
+        const category = getCategoryById(expense.category || 'other');
         const CategoryIcon = getCategoryIcon(category.id);
         const showDeleteOption = canDeleteExpense(expense);
 
