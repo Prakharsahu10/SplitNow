@@ -63,15 +63,23 @@ export default function PersonExpensesPage(): React.JSX.Element {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("expenses");
 
+  // Get the current user first
+  const { data: currentUser } = useConvexQuery(api.users.getCurrentUser);
+
+  // Then get the expenses and settlements between users
   const { data, isLoading } = useConvexQuery(
-    api.dashboard.getUserBalances, // Using available API for now
-    {}
+    api.expenses.getExpensesBetweenUsers, // This should be the correct API endpoint
+    currentUser && params.id
+      ? {
+          userId: params.id as string,
+        }
+      : "skip"
   );
 
-  // Type assertions for the data (placeholder until API is available)
+  // Type assertions for the data
   const typedData = data as ExpensesBetweenUsersData | undefined;
 
-  if (isLoading) {
+  if (isLoading || !currentUser) {
     return (
       <div className="container mx-auto py-12">
         <BarLoader width={"100%"} color="#36d7b7" />
